@@ -28,7 +28,7 @@ function Invoke-Build {
             }
                 
             ."$($script:ModulePath)\CascadiaMipRedist\update.ps1" @updateParams
-            Invoke-PublishModule -Build -Force
+            Invoke-PublishModule -Build
     
             ."$($script:ModulePath)\Cascadia.VideoOS.ConfigurationAPI\update.ps1" @updateParams
             Invoke-NuGetPack -Name Cascadia.VideoOS.ConfigurationAPI

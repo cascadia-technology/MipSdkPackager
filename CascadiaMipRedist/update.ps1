@@ -1,7 +1,7 @@
 param([string] $MipSdkVersion, [string] $ManifestVersion, [string] $ReleaseNotes)
 
 $name = (Get-Item $PSScriptRoot).Name
-$binPath = "$($script:Config.MipSdkRepo)\$MipSdkVersion\Bin"
+$binPath = "$($script:Config.MipSdkRepo)\$MipSdkVersion\Redistributable"
 try {
     
     if (Test-Path $PSScriptRoot\Bin) {
