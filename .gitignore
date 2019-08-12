@@ -1,0 +1,5 @@
+[Oo]utput/
+[Bb]in/
+[Bb]uild
+*.dll
+*.bat

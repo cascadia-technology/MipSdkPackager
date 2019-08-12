@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Cascadia.VideoOS.Platform.Transact</id>
+    <version>13.2.3</version>
+    <authors>Cascadia Technology LLC, Joshua Hendricks</authors>
+    <owners>Milestone Systems A/S</owners>
+    <projectUrl>https://doc.developer.milestonesys.com/html/index.html</projectUrl>
+    <iconUrl>https://www.cascadia.tech/wp-content/uploads/2019/08/CascadiaIcon_white.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Unofficial and unmodified Milestone Systems MIP SDK redistributable binaries required for developing XProtect Transact connectors</description>
+    <releaseNotes>Testing build automation</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Milestone XProtect MIPSDK redistributable transact</tags>
+    <dependencies />
+    <references />
+  </metadata>
+  <files>
+    <file src="Bin\VideoOS.Platform.Transact.dll" target="lib\net47" />
+  </files>
+</package>
