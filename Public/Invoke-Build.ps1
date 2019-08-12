@@ -21,35 +21,38 @@ function Invoke-Build {
                 ManifestVersion = $ManifestVersion
                 ReleaseNotes = $ReleaseNotes
             }
-            Get-ChildItem $script:ModulePath\Output | Remove-Item
-            $packages = @()
-    
+            if (Test-Path $script:ModulePath\Output) {
+                Get-ChildItem $script:ModulePath\Output | Remove-Item
+            } else {
+                New-Item $script:ModulePath\Output -ItemType Directory
+            }
+                
             ."$($script:ModulePath)\CascadiaMipRedist\update.ps1" @updateParams
             Invoke-PublishModule -Build
     
             ."$($script:ModulePath)\Cascadia.VideoOS.ConfigurationAPI\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.ConfigurationAPI
+            Invoke-NuGetPack -Name Cascadia.VideoOS.ConfigurationAPI
     
             ."$($script:ModulePath)\Cascadia.VideoOS.Management\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Management
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Management
     
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.Transact\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.Transact
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.Transact
     
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.SDK\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK
             
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.SDK.Export\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Export
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Export
             
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.SDK.Log\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Log
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Log
             
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.SDK.Media\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Media
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.Media
     
             ."$($script:ModulePath)\Cascadia.VideoOS.Platform.SDK.UI\update.ps1" @updateParams
-            $packages += Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.UI
+            Invoke-NuGetPack -Name Cascadia.VideoOS.Platform.SDK.UI
         }
         catch {
             throw

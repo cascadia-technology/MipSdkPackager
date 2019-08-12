@@ -13,8 +13,12 @@ try {
     if (!(Test-Path $binPath)) {
         throw (New-Object System.ArgumentOutOfRangeException -ArgumentList "MipSdkVersion","MIP SDK $MipSdkVersion binaries not found" )
     }
+    if (Test-Path $PSScriptRoot\Bin) {
+        Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\Bin -ItemType Directory
+    }
     
-    Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
     Copy-Item "$binPath\VideoOS.ConfigurationAPI.dll" $PSScriptRoot\Bin -Force -Verbose
 
     $name = (Get-Item $PSScriptRoot).Name

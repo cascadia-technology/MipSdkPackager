@@ -14,7 +14,12 @@ try {
         throw (New-Object System.ArgumentOutOfRangeException -ArgumentList "MipSdkVersion","MIP SDK $MipSdkVersion binaries not found" )
     }
     
-    Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    if (Test-Path $PSScriptRoot\Bin) {
+        Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\Bin -ItemType Directory
+    }
+
     Copy-Item "$binPath\VideoOS.Platform.Transact.dll" $PSScriptRoot\Bin -Force -Verbose
 
     $name = (Get-Item $PSScriptRoot).Name

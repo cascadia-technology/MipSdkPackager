@@ -20,7 +20,7 @@ function Invoke-NuGetPack {
             $version = $xml.SelectSingleNode("/package/metadata/version").InnerText
         
             .$script:NuGet pack $nuspec.Name
-            Move-Item -Path "$id.$version.nupkg" -Destination "..\Output" -Force -Verbose:$VerbosePreference -PassThru
+            Move-Item -Path "$id.$version.nupkg" -Destination "..\Output" -Force -Verbose:$VerbosePreference
         } catch {
             throw
         } finally {

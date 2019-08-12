@@ -24,9 +24,19 @@ try {
     if (!(Test-Path $binPath)) {
         throw (New-Object System.ArgumentOutOfRangeException -ArgumentList "MipSdkVersion","MIP SDK $MipSdkVersion binaries not found" )
     }
-    Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
-    Get-ChildItem $PSScriptRoot\build | Remove-Item -Recurse -Force
     
+    if (Test-Path $PSScriptRoot\Bin) {
+        Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\Bin -ItemType Directory
+    }
+
+    if (Test-Path $PSScriptRoot\build) {
+        Get-ChildItem $PSScriptRoot\build | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\build -ItemType Directory
+    }
+
     try {
         Push-Location $binPath
         . ".\CopyExportFiles.bat" $PSScriptRoot\build

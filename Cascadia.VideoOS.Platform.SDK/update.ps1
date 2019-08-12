@@ -13,7 +13,13 @@ try {
     if (!(Test-Path $binPath)) {
         throw (New-Object System.ArgumentOutOfRangeException -ArgumentList "MipSdkVersion","MIP SDK $MipSdkVersion binaries not found" )
     }
-    Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    
+    if (Test-Path $PSScriptRoot\Bin) {
+        Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\Bin -ItemType Directory
+    }
+
     Copy-Item "$binPath\VideoOS.Platform.dll" $PSScriptRoot\Bin -Force -Verbose
     Copy-Item "$binPath\VideoOS.Platform.SDK.dll" $PSScriptRoot\Bin -Force -Verbose
 

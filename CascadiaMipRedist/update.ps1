@@ -3,7 +3,13 @@ param([string] $MipSdkVersion, [string] $ManifestVersion, [string] $ReleaseNotes
 $name = (Get-Item $PSScriptRoot).Name
 $binPath = "$($script:Config.MipSdkRepo)\$MipSdkVersion\Bin"
 try {
-    Get-ChildItem $PSScriptRoot\Bin -Recurse | Remove-Item -Recurse -Force
+    
+    if (Test-Path $PSScriptRoot\Bin) {
+        Get-ChildItem $PSScriptRoot\Bin | Remove-Item -Recurse -Force
+    } else {
+        New-Item $PSScriptRoot\Bin -ItemType Directory
+    }
+
     Copy-Item $binPath\* $PSScriptRoot\Bin -Recurse
     $fileList = Get-ChildItem $PSScriptRoot\Bin\* -Recurse | ForEach-Object { 
         if (!$_.Attributes.HasFlag([System.IO.FileAttributes]::Directory)) {
