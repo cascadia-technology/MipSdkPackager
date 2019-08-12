@@ -13,4 +13,21 @@ C:\MIPSDKREPO
 \---13.2
     \---Bin
 ```
-The content of the Bin folder should include numerous DLL files and the Copy*.bat files included with the SDK and redistributable SDK binaries.
+It's important for the first level folders of the repo to reflect the MIP SDK version number as you will supply this in your Invoke-Build command. The content of the Bin folder should include numerous DLL files and the Copy*.bat files included with the SDK and redistributable SDK binaries.
+
+## How to Build
+Once you've cloned the repo, and created your local MIP SDK repository, you can call reload-module.ps1 to make sure the module is unloaded and imported cleanly.
+
+```
+.\reload-module.ps1
+```
+
+If it's your first time importing the module, you will need to provide input for the MIP SDK repository path, and API keys.
+
+Next, use Invoke-Build. The following example will build nuget packages using MIP SDK version 13.2, and the version in the packages will be set to 13.2.0, with a release note of "Initial release"
+
+```
+Invoke-Build 13.2 13.2.0 "Initial release"
+```
+
+You'll find the \*.nupkg files in the Output folder, and the CascadiaMipRedist PowerShell module in it's own folder, both at the root of the repo.
