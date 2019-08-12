@@ -15,6 +15,11 @@ C:\MIPSDKREPO
 ```
 It's important for the first level folders of the repo to reflect the MIP SDK version number as you will supply this in your Invoke-Build command. The content of the Bin folder should include numerous DLL files and the Copy*.bat files included with the SDK and redistributable SDK binaries.
 
+## Orientation
+There are 8 NuGet packages and 1 PowerShell module in this repo with their manifests and content each in their own subfolders. Also in these folders are update.ps1 scripts which take the MIP SDK version, intended manifest version, and a release note, and then copied the necessary DLL's from the MIP SDK repo before updating the nuspec/psd1 files with the desired version and release notes.
+
+Calling Invoke-Build will update each of these packages, then call the nuget pack command, writing the packages to the Output path, while the CascadiaMipRedist PowerShell module will be copied to Documents\WindowsPowerShell\Modules in preparation for Publish-Module.
+
 ## How to Build
 Once you've cloned the repo, and created your local MIP SDK repository, you can call reload-module.ps1 to make sure the module is unloaded and imported cleanly.
 
