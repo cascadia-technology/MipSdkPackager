@@ -3,7 +3,10 @@ function Invoke-PublishModule {
     param (
         [Parameter()]
         [switch]
-        $Build
+        $Build,
+        [Parameter()]
+        [switch]
+        $Force
     )
 
     process {
@@ -21,7 +24,7 @@ function Invoke-PublishModule {
             Copy-Item "$($script:ModulePath)\CascadiaMipRedist\CascadiaMipRedist.psd1" $modulePath -ErrorAction Stop -Verbose:$VerbosePreference
             Copy-Item "$($script:ModulePath)\CascadiaMipRedist\CascadiaMipRedist.psm1" $modulePath -ErrorAction Stop -Verbose:$VerbosePreference
         
-            Publish-Module -Name CascadiaMipRedist -NuGetApiKey $script:Config.PSGalleryApiKey -Verbose:$VerbosePreference -WhatIf:$($Build.IsPresent)
+            Publish-Module -Name CascadiaMipRedist -NuGetApiKey $script:Config.PSGalleryApiKey -Verbose:$VerbosePreference -WhatIf:$($Build.IsPresent) -Force:$($Force.IsPresent)
         }
         catch {
             throw
