@@ -57,6 +57,7 @@ try {
     Set-NuspecProperty -Path "$PSScriptRoot\$name.nuspec" -Property version -Value $ManifestVersion      
     if (![string]::IsNullOrEmpty($ReleaseNotes)) {
         Set-NuspecProperty -Path "$PSScriptRoot\$name.nuspec" -Property releaseNotes -Value $ReleaseNotes
+        Set-NuspecDependency -Path "$PSScriptRoot\$name.nuspec" -Id Cascadia.VideoOS.Platform.SDK -Version $MipSdkVersion
     }
 } catch {
     throw
