@@ -5,8 +5,7 @@ if ($ENV:Path -notlike "*$MipSdkPath*") {
 
 foreach ($dll in Get-ChildItem "$MipSdkPath\*.dll") {
     try {
-        Add-Type -Path $dll.FullName -ErrorAction Stop
-        
+        $null = [System.Reflection.Assembly]::LoadFrom($dll.FullName)
     } catch {
     }
 }
